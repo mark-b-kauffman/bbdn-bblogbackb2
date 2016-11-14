@@ -27,8 +27,8 @@ package com.blackboard.bblogbackb2;
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-// READ CAREFULLY! There are two loggers used in this class. The first is using the Blackboard Java APIs, Log and LogService.
-// The second is using slf4j and Logback. The second logs to the blackboard/logs/custom directory and is used to keep track of everything 
+// READ CAREFULLY! There are two loggers used in this class. The first is using Logback to log to the directory returned by 
+// PluginUtil.getLogDirectory. The second logs to the blackboard/logs/custom directory and is used to keep track of everything 
 // the code does with the first. The reason for this is that is so that we can follow the logic this class uses to create and log to 
 // a file using the Learn Log and LogService classes.
 
@@ -52,7 +52,7 @@ public class MybbLOGGER
   
   /* The following loggers, custom and plugin, are defined in the logback.xml file. */
   private static final Logger customLogback = LoggerFactory.getLogger("custom");
-  private static final Logger pluginLogback = LoggerFactory.getLogger("plugin");
+  private static final Logger pluginLogback = LoggerFactory.getLogger(MybbLOGGER.class);
   
   /* We no longer use Learn's Logging APIs so we delete all of this
 
@@ -85,14 +85,8 @@ public class MybbLOGGER
   
   public MybbLOGGER()
   {
-    // planning ahead. really shouldn't need so much here... Logback aleady has our path set for us.
-    /* Let's get rid of all of this for now.
-    if (PlugInUtil.getLogDirectory("bbdn", "bblogbackb2") != null) {
-      this.pluginLogPath = PlugInUtil.getLogDirectory("bbdn", "bblogbackb2").getAbsolutePath();
-    } else {
-      this.pluginLogPath = ""; // Something really went wrong here if this didn't run on startup...
-    }
-    */
+    // Don't need so much here... Logback aleady has our path set for us.
+
   }
   
   public static MybbLOGGER getBbLogger() // Define a singelton logging class.
@@ -114,7 +108,7 @@ public class MybbLOGGER
           logLevelString=getLoglevel();
           
       customLogback.info("Enter logError() - logLevelString:"+logLevelString);
-      pluginLogback.error("EnterLogError()- logLevelString:"+logLevelString);
+ 
       
       if ((getLoglevel() == null) || ("ALL".equalsIgnoreCase(getLoglevel())) || ("ERROR".equalsIgnoreCase(getLoglevel())) || ("DEBUG".equalsIgnoreCase(getLoglevel())) || ("WARN".equalsIgnoreCase(getLoglevel())) || ("INFO".equalsIgnoreCase(getLoglevel()))) {
 
@@ -122,7 +116,7 @@ public class MybbLOGGER
           // No longer needed! logMessage(logMessage, LogService.Verbosity.ERROR);
       }
       customLogback.info("Exit logError()");
-      pluginLogback.info("Exit logError()");
+
   }
   
   public void logInfo(String logMessage)
