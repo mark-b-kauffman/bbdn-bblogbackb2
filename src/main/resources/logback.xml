@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+ 
+    <!-- The following is to log to the logs/custom directory.  -->
+    <appender name="CUSTOMFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+        <file>../../../logs/custom/bblogbackb2.logback.log</file>
+
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>../../../logs/custom/bblogbackb2.%d{yyyy-MM-dd}.log</fileNamePattern>
+      
+            <!-- keep 10 days' worth of history -->
+            <maxHistory>10</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%date{yyyy-MM-dd HH:mm:ss} | %-5level | %-45(%L:%logger{40}) | %m%n%ex{10}</pattern>
+        </encoder>
+    </appender>
+    <!-- The following 2 loggers use the above appender -->
+    <logger name="org.springframework" additivity="false">
+        <level value="error" />
+        <appender-ref ref="CUSTOMFILE" />
+    </logger>
+
+    
+    <logger name="custom" additivity="false">
+		<level value="info" />
+		<appender-ref ref="CUSTOMFILE" />
+    </logger>
+      
+    <!-- The following is to log to the log directory returned by Learn's PluginUtils.getLogDirectory -->
+    <!-- The vendorId and handle are hard-coded here.... -->
+    <define name="pluginLogDir" class="com.alltheducks.logging.logback.BbPluginLogDirPropertyDefiner">
+        <vendorId>bbdn</vendorId>
+        <handle>bblogbackb2</handle>
+    </define>
+
+    <appender name="PLUGIN" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${pluginLogDir}/bbdn-bblogbackb2.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${pluginLogDir}/bbdn-bblogbackb2.%d{yyyy-MM-dd}.log</fileNamePattern>
+            
+            <!-- keep 10 days' worth of history -->
+            <maxHistory>10</maxHistory>
+            
+        </rollingPolicy>
+        <encoder>
+            <!-- This pattern ensures logging will work in Learn SaaS -->
+            <pattern>%date{yyyy-MM-dd HH:mm:ss} | %-5level | %-45(%L:%logger{40}) | %m%n%ex{10}</pattern>
+        </encoder>
+    </appender>
+    
+    <logger name="plugin" additivity="false">
+        <level value = "info"/>
+        <appender-ref ref="PLUGIN"/>
+    </logger>
+    
+    <logger name="com.blackboard.bblogbackb2" additivity="false">
+        <level value = "info"/>
+        <appender-ref ref="PLUGIN"/>
+    </logger> 
+
+  
+    <root level="ALL">
+        <appender-ref ref="CUSTOMFILE" />
+    </root>
+
+</configuration>

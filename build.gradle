@@ -1,0 +1,94 @@
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'maven'
+
+// define the version for the project when publishing to maven
+group "blackboard.plugin"
+version "1.1.0-SNAPSHOT"
+
+project.ext {
+  learnVersion = "3000.1.0-rel.52"
+  springVersion = "4.2.4.RELEASE"
+  hibernateVersion = "4.1.10.Final"
+}
+
+description = """bblogbackb2"""
+
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
+
+def logbackVersion      = '1.0.13'
+def logbackClassic      = "ch.qos.logback:logback-classic:${logbackVersion}"
+def logbackCore         =  "ch.qos.logback:logback-core:${logbackVersion}"
+
+def slf4jVersion = '1.6.6'
+def slf4jAPI     = "org.slf4j:slf4j-api:${slf4jVersion}"
+def slf4jJCL     = "org.slf4j:jcl-over-slf4j:${slf4jVersion}"
+def slf4jLog4J   = "org.slf4j:slf4j-log4j12:${slf4jVersion}"
+
+repositories {
+        
+     maven { url "http://repo.maven.apache.org/maven2" }
+     maven { url "https://maven.blackboard.com/content/repositories/releases/" }
+     mavenCentral()
+}
+
+// for the b2deploy task defined later.
+configurations {
+  buildUtils
+}
+
+dependencies {
+    // Blackboard Dependencies
+    // providedCompile dependencies are libraries needed to build, but should not be included in the B2 WAR.
+  providedCompile( "blackboard.platform:bb-platform:$project.ext.learnVersion" ) { transitive = false }
+  providedCompile( "blackboard.platform:bb-cms-admin:$project.ext.learnVersion" ) { transitive = false }
+  providedCompile( "blackboard.platform:bb-taglibs:$project.ext.learnVersion" ) { transitive = false }
+    
+    // Spring Dependencies
+    compile(group: 'org.springframework', name: 'spring-context', version:'3.1.1.RELEASE') {
+exclude(module: 'commons-logging')
+    compile group: 'com.google.guava', name: 'guava', version: '15.0'
+    }
+
+    compile(logbackClassic)
+    compile(logbackCore)
+
+    compile(slf4jAPI)
+    compile(slf4jJCL)
+    compile(slf4jLog4J)
+
+    compile group: 'org.springframework', name: 'spring-webmvc', version:'3.1.1.RELEASE'
+    compile group: 'org.aspectj', name: 'aspectjrt', version:'1.6.10'
+    // compile group: 'org.slf4j', name: 'slf4j-api', version:'1.6.6'
+    compile group: 'javax.inject', name: 'javax.inject', version:'1'
+    compile group: 'javax.servlet', name: 'jstl', version:'1.2'
+
+    runtime group: 'org.slf4j', name: 'jcl-over-slf4j', version:'1.6.6'
+    runtime group: 'org.slf4j', name: 'slf4j-log4j12', version:'1.6.6'
+    runtime(group: 'log4j', name: 'log4j', version:'1.2.15') {
+        exclude(module: 'mail')
+        exclude(module: 'jms')
+        exclude(module: 'jmxtools')
+        exclude(module: 'jmxri')
+    }
+    testCompile group: 'junit', name: 'junit', version:'4.7'
+    providedCompile group: 'javax.servlet', name: 'servlet-api', version:'2.5'
+    providedCompile group: 'javax.servlet.jsp', name: 'jsp-api', version:'2.1'
+    
+    // A couple more Blackboard items...
+    runtime "org.javassist:javassist:3.17.1-GA", "dom4j:dom4j:1.6.1"
+    buildUtils "org.oscelot:b2deploy-task:0.1.0"
+    
+} // END dependencies
+
+
+// Add a task to deploy a B2 using starting block
+task deployB2( dependsOn: "war" ) << {
+      ant.taskdef( name: "b2deploy", classname: "org.oscelot.ant.B2DeployTask", classpath: project.configurations.buildUtils.asPath )
+      ant.b2deploy( localfilepath: project.war.archivePath, host: System.getProperty("server"), courseorgavailable: 'true', clean: 'true' )
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '1.5'
+}

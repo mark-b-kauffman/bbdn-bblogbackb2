@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<mvc:annotation-driven />
+  <!--
+  Had to do the following because our starting structure was webapp/WEB-INF webapp/images, webapp/linkjsp.
+  Where our images were are in the images folder and our jsp pages are in linkjsp.
+
+  With the following we access the image files from the jsps in linkjsp as:
+  <img src=\"../images/BackArrow50.jpeg\" alt=\"back\">
+
+  http://stackoverflow.com/questions/12847247/not-displaying-images-in-spring-mvc
+  If you want to keep the static resources outside the WEB-INF folders in your web
+  root and want the container to handle the static resource requests, you should add
+  this to your application context file:
+  -->
+  <mvc:default-servlet-handler />
+
+  <!-- Spring will NOT allow us to mix the following resources mapping with the above solution!!
+
+  For our Spring views, from the same stackoverflow entry:
+  Alternatively, and more common, is to have a resources folder which contains
+  all your resources (images, css, js, etc...), broken out by sub-directories.
+
+  Your configuration would then look like:
+  -->
+  <!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+<!-- resources mapping="/resources/**" location="/resources/" / -->
+
+<!--
+  And your resources would be referenced as follows:
+  <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/screen.css" />" />
+  <script type="text/javascript" src="<c:url value="/resources/js/jquery-1.6.4.min.js" />"></script>
+  <img src="<c:url value="/resources/images/left_arrow.png" />" alt="" />
+-->
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+	
+	<context:component-scan base-package="com.blackboard.bblogbackb2" />
+	
+		
+</beans:beans>

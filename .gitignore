@@ -1,0 +1,14 @@
+.gradle
+.nb-gradle
+.settings
+.classpath
+.project
+.DS*
+bbloggerb2.sublime-workspace 
+bbloggerb2.sublime-project
+build
+build/
+private
+private/
+target/
+WebContent/
