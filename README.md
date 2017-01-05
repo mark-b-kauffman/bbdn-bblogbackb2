@@ -4,6 +4,9 @@ BBLOGBACK B2
 This project is based from the Spring Tool Suite (STS) Spring MVC project. We've added a bb-manifest.xml and an example of a view that uses the Blackboard Tags to render a page that has the look and feel of other Blackboard Learn pages.
 Lastly, we've added code that uses the Logback Java APIs to create log files. 
 
+Credit to Shane Argo @ All the Ducks for the b2-logging-utils. Thank you Shane!
+https://github.com/AllTheDucks/b2-logging-utils
+
 ### Clone to local repo
 ####bitbucket: 
 git clone https://markkauffman2000@bitbucket.org/markkauffman2000/bbdn-bblogback.git bbdn-bblogbackb2
