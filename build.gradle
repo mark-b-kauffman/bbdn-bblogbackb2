@@ -4,7 +4,7 @@ apply plugin: 'maven'
 
 // define the version for the project when publishing to maven
 group "blackboard.plugin"
-version "1.1.1-SNAPSHOT"
+version "1.7.6-SNAPSHOT"
 
 project.ext {
   learnVersion = "3000.1.0-rel.52"
@@ -24,10 +24,15 @@ def logbackCore         =  "ch.qos.logback:logback-core:${logbackVersion}"
 def slf4jVersion = '1.6.6'
 def slf4jAPI     = "org.slf4j:slf4j-api:${slf4jVersion}"
 def slf4jJCL     = "org.slf4j:jcl-over-slf4j:${slf4jVersion}"
+// mbk - We no longer user slf4jLog4J. References have been commented out.
+// We're using logback. Having both in here caused a multiple bindings warning.
+// On Learn 3000. and earlier the logback logger was choosen by the runtime.
+// But on 3100 and later it wasn't and we didn't get in a logs, because
+// this code does all logging using logback!
 def slf4jLog4J   = "org.slf4j:slf4j-log4j12:${slf4jVersion}"
 
 repositories {
-        
+
      maven { url "http://repo.maven.apache.org/maven2" }
      maven { url "https://maven.blackboard.com/content/repositories/releases/" }
      mavenCentral()
@@ -44,7 +49,7 @@ dependencies {
   providedCompile( "blackboard.platform:bb-platform:$project.ext.learnVersion" ) { transitive = false }
   providedCompile( "blackboard.platform:bb-cms-admin:$project.ext.learnVersion" ) { transitive = false }
   providedCompile( "blackboard.platform:bb-taglibs:$project.ext.learnVersion" ) { transitive = false }
-    
+
     // Spring Dependencies
     compile(group: 'org.springframework', name: 'spring-context', version:'3.1.1.RELEASE') {
 exclude(module: 'commons-logging')
@@ -56,7 +61,7 @@ exclude(module: 'commons-logging')
 
     compile(slf4jAPI)
     compile(slf4jJCL)
-    compile(slf4jLog4J)
+    // compile(slf4jLog4J)
 
     compile group: 'org.springframework', name: 'spring-webmvc', version:'3.1.1.RELEASE'
     compile group: 'org.aspectj', name: 'aspectjrt', version:'1.6.10'
@@ -64,22 +69,22 @@ exclude(module: 'commons-logging')
     compile group: 'javax.inject', name: 'javax.inject', version:'1'
     compile group: 'javax.servlet', name: 'jstl', version:'1.2'
 
-    runtime group: 'org.slf4j', name: 'jcl-over-slf4j', version:'1.6.6'
-    runtime group: 'org.slf4j', name: 'slf4j-log4j12', version:'1.6.6'
-    runtime(group: 'log4j', name: 'log4j', version:'1.2.15') {
-        exclude(module: 'mail')
-        exclude(module: 'jms')
-        exclude(module: 'jmxtools')
-        exclude(module: 'jmxri')
-    }
+    // runtime group: 'org.slf4j', name: 'jcl-over-slf4j', version:'1.6.6'
+    // runtime group: 'org.slf4j', name: 'slf4j-log4j12', version:'1.6.6'
+    // runtime(group: 'log4j', name: 'log4j', version:'1.2.15') {
+    //    exclude(module: 'mail')
+    //    exclude(module: 'jms')
+    //    exclude(module: 'jmxtools')
+    //    exclude(module: 'jmxri')
+    // }
     testCompile group: 'junit', name: 'junit', version:'4.7'
     providedCompile group: 'javax.servlet', name: 'servlet-api', version:'2.5'
     providedCompile group: 'javax.servlet.jsp', name: 'jsp-api', version:'2.1'
-    
+
     // A couple more Blackboard items...
     runtime "org.javassist:javassist:3.17.1-GA", "dom4j:dom4j:1.6.1"
     buildUtils "org.oscelot:b2deploy-task:0.1.0"
-    
+
 } // END dependencies
 
 

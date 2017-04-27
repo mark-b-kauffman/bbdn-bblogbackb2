@@ -10,7 +10,7 @@
     <description value="bblogbackb2" />
     <default-locale value="en_US" />
 
-    <version value="1.1.1" />
+    <version value="1.7.6" />
     <requires>
       <bbversion value="3000.1.0" />
     </requires>
@@ -36,10 +36,10 @@
              <toolbar value="images/fast-forward.blue.gif"/>
              <listitem value="images/fast-forward.blue.gif"/>
          </icons>
-          <types>              
+          <types>
             <type>
                 <action-type value="mashup"/>
-            </type>            		  
+            </type>
           </types>
       </content-handler -->
 
@@ -78,7 +78,7 @@
       <permission type="attribute" name="user.*" actions="get,set" />
       <permission type="java.util.PropertyPermission" name="*" actions="read,write" />
       <permission type="socket" name="*" actions="connect" />
-      
+
       <!-- We need these permissions to allow Spring to auto-discover and wire beans together and Hibernate to interact with objects. -->
       <permission type="java.lang.reflect.ReflectPermission" name="suppressAccessChecks" />
       <permission type="java.lang.RuntimePermission" name="accessDeclaredMembers" />
@@ -86,9 +86,9 @@
       <permission type="java.lang.RuntimePermission" name="setContextClassLoader" />
       <!-- permission type="java.io.FilePermission" name="${java.home}/lib/*" actions="read" / -->
       <!-- Logging Permissions -->
-      <permission type="java.io.FilePermission" name="BB_HOME/logs/plugins/-" actions="write" /> 
-      
-      <!-- The following are extreemly promiscuous permissions. If you're just writing logs. Use the above instead. -->   
+      <permission type="java.io.FilePermission" name="BB_HOME/logs/plugins/-" actions="write" />
+
+      <!-- The following are extreemly promiscuous permissions. If you're just writing logs. Use the above instead. -->
       <permission type="java.io.FilePermission" actions="read,write" name="&amp;lt;&amp;lt;ALL FILES&amp;gt;&amp;gt;" />
 
      <permission type="java.security.SecurityPermission" name="*" actions="insertProvider.SunJSSE" />
