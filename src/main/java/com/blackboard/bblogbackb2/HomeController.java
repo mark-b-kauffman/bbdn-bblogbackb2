@@ -28,6 +28,7 @@ package com.blackboard.bblogbackb2;
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+import blackboard.platform.plugin.PlugInUtil;
 
  import ch.qos.logback.classic.LoggerContext;
  import ch.qos.logback.core.util.StatusPrinter;
@@ -68,8 +69,10 @@ public class HomeController {
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 
 		String formattedDate = dateFormat.format(date);
+		String uriStem = PlugInUtil.getUriStem("bbdn", "bblogbackb2");
 
 		model.addAttribute("serverTime", formattedDate );
+		model.addAttribute("uriStem", uriStem);
 
 		return "home";
 	}

@@ -38,5 +38,7 @@
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
+
+<P> The uriStem is ${uriStem}. </P>
 </body>
 </html>

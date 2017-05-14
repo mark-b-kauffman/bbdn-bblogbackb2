@@ -4,7 +4,7 @@ apply plugin: 'maven'
 
 // define the version for the project when publishing to maven
 group "blackboard.plugin"
-version "1.8.0-SNAPSHOT"
+version "1.8.2-SNAPSHOT"
 
 project.ext {
   learnVersion = "3000.1.0-rel.52"
