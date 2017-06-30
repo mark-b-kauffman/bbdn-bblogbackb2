@@ -10,7 +10,7 @@
     <description value="bblogbackb2" />
     <default-locale value="en_US" />
 
-    <version value="1.8.2" />
+    <version value="1.8.4" />
     <requires>
       <bbversion value="3000.1.0" />
     </requires>
@@ -90,13 +90,6 @@
       <permission type="java.io.FilePermission" name="BB_HOME/-" actions="read,write,delete"/>
       <permission type="java.io.FilePermission" name="BB_CONTENT/-" actions="read,write,delete"/>
 
-
-      <!-- The following were shared by another developer. They didn't work for the logback code. -->
-      <!-- permission type="java.io.FilePermission" name="BB_HOME" actions="read,write,delete"/>
-      <permission type="java.io.FilePermission" name="BB_CONTENT" actions="read,write,delete"/>
-      <permission type="java.io.FilePermission" name="BB_HOME\logs-" actions="read,write,delete"/>
-      <permission type="java.io.FilePermission" name="BB_HOME\\apps-" actions="read,write,delete"/>
-      <permission type="java.io.FilePermission" name="BB_CONTENT/vi/-" actions="read,write,delete"/ -->
 
       <!-- The following are extreemly promiscuous permissions. Use the above instead. -->
       <!-- permission type="java.io.FilePermission" actions="read,write" name="&amp;lt;&amp;lt;ALL FILES&amp;gt;&amp;gt;" / -->

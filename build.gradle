@@ -1,10 +1,22 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+
+    dependencies {
+        classpath 'com.bmuschko:gradle-tomcat-plugin:2.2.5'
+    }
+}
+
+apply plugin: 'com.bmuschko.tomcat'
 apply plugin: 'java'
 apply plugin: 'war'
 apply plugin: 'maven'
 
 // define the version for the project when publishing to maven
 group "blackboard.plugin"
-version "1.8.2-SNAPSHOT"
+version "1.8.4-SNAPSHOT"
 
 project.ext {
   learnVersion = "3000.1.0-rel.52"
@@ -43,12 +55,34 @@ configurations {
   buildUtils
 }
 
+// Configure so that at run-time the compiled jsp java is used.
+tomcat {
+    jasper {
+        validateTld = false
+	webXmlFragment = file("$webAppDir/WEB-INF/generated_web.xml")
+	addWebXmlMappings = true
+    }
+}
+
 dependencies {
+    // Pre-compile jsp Dependencies. tomcatVersion 8.5.4 is not available as of this writing
+    def tomcatVersion = '8.5.0'
+    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+        "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}",
+        "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}",
+        "blackboard.platform:bb-taglibs:$project.ext.learnVersion",
+        "blackboard.platform:bb-platform:$project.ext.learnVersion",
+        "blackboard.platform:bb-bbxythos:$project.ext.learnVersion",
+        "javax.servlet:jstl:1.2"
+
+    providedCompile "javax.servlet:servlet-api:2.5"
+
     // Blackboard Dependencies
     // providedCompile dependencies are libraries needed to build, but should not be included in the B2 WAR.
-  providedCompile( "blackboard.platform:bb-platform:$project.ext.learnVersion" ) { transitive = false }
-  providedCompile( "blackboard.platform:bb-cms-admin:$project.ext.learnVersion" ) { transitive = false }
-  providedCompile( "blackboard.platform:bb-taglibs:$project.ext.learnVersion" ) { transitive = false }
+    // You should NEVER include Learn JARs (other than webapis) in your B2.
+    providedCompile( "blackboard.platform:bb-platform:$project.ext.learnVersion" ) { transitive = false }
+    providedCompile( "blackboard.platform:bb-bbxythos:$project.ext.learnVersion" ) { transitive = false }
+    providedCompile( "blackboard.platform:bb-taglibs:$project.ext.learnVersion" ) { transitive = false }
 
     // Spring Dependencies
     compile(group: 'org.springframework', name: 'spring-context', version:'3.1.1.RELEASE') {
@@ -94,6 +128,22 @@ task deployB2( dependsOn: "war" ) << {
       ant.b2deploy( localfilepath: project.war.archivePath, host: System.getProperty("server"), courseorgavailable: 'true', clean: 'true' )
 }
 
+// This task runs the build script that compiles jsp pages on build.
+task compileJsps(type: JavaCompile) {
+  group = 'build'
+  description = 'Translates and compiles JSPs'
+  classpath = configurations.tomcat + sourceSets.main.output + sourceSets.main.runtimeClasspath
+  sourceCompatibility = '1.8'
+  targetCompatibility = '1.8'
+  destinationDir = file("src/main/webapp/WEB-INF/classes")
+  source = file("build/jasper/org/apache/jsp")
+  dependsOn classes
+  dependsOn tomcatJasper
+}
+
 task wrapper(type: Wrapper) {
   gradleVersion = '1.5'
 }
+
+// To build our war we use the compileJsps task
+war.dependsOn compileJsps

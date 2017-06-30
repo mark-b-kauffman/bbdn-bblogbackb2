@@ -25,7 +25,101 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 		
-	<servlet-mapping>
+	<!-- JSPC servlet mappings start -->
+
+    <servlet>
+        <servlet-name>org.apache.jsp.linkjsp.hello_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.linkjsp.hello_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.linkjsp.insertExternalLink_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.linkjsp.insertExternalLink_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.linkjsp.insertItemLink_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.linkjsp.insertItemLink_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.linkjsp.insertUserData_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.linkjsp.insertUserData_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.linkjsp.itemdata_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.linkjsp.itemdata_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.linkjsp.userdata_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.linkjsp.userdata_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.WEB_002dINF.views.home_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.WEB_002dINF.views.home_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.WEB_002dINF.views.learnhello_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.WEB_002dINF.views.learnhello_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>org.apache.jsp.WEB_002dINF.views.logbacklog_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.WEB_002dINF.views.logbacklog_jsp</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.linkjsp.hello_jsp</servlet-name>
+        <url-pattern>/linkjsp/hello.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.linkjsp.insertExternalLink_jsp</servlet-name>
+        <url-pattern>/linkjsp/insertExternalLink.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.linkjsp.insertItemLink_jsp</servlet-name>
+        <url-pattern>/linkjsp/insertItemLink.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.linkjsp.insertUserData_jsp</servlet-name>
+        <url-pattern>/linkjsp/insertUserData.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.linkjsp.itemdata_jsp</servlet-name>
+        <url-pattern>/linkjsp/itemdata.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.linkjsp.userdata_jsp</servlet-name>
+        <url-pattern>/linkjsp/userdata.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.WEB_002dINF.views.home_jsp</servlet-name>
+        <url-pattern>/WEB-INF/views/home.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.WEB_002dINF.views.learnhello_jsp</servlet-name>
+        <url-pattern>/WEB-INF/views/learnhello.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.WEB_002dINF.views.logbacklog_jsp</servlet-name>
+        <url-pattern>/WEB-INF/views/logbacklog.jsp</url-pattern>
+    </servlet-mapping>
+
+<!-- JSPC servlet mappings end -->
+
+<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
