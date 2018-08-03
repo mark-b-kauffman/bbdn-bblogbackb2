@@ -29,6 +29,12 @@ package com.blackboard.bblogbackb2;
  */
 
 import blackboard.platform.plugin.PlugInUtil;
+// WARNING: GeneralUtil is an unpublished Class.
+// Blackboard in no way recommends or supports it's use for any purpose.
+// Use at your own risk. It may change at any time.
+// You are responsible for monitorin the package it ships with and
+// making changes to your code as necessary. Blackboard is under no
+// obligation to inform you if or when the class changes.
 import blackboard.util.GeneralUtil;
 
  import ch.qos.logback.classic.LoggerContext;
@@ -91,6 +97,12 @@ public class HomeController {
 
 		String formattedDate = dateFormat.format(date);
 
+    // WARNING: GeneralUtil is an unpublished Class.
+    // Blackboard in no way recommends or supports it's use for any purpose.
+    // Use at your own risk. It may change at any time.
+    // You are responsible for monitorin the package it ships with and
+    // making changes to your code as necessary. Blackboard is under no
+    // obligation to inform you if or when the class changes.
     String instance_guid = GeneralUtil.getSystemInstallationId();
 
     model.addAttribute("INSTANCE_GUID", instance_guid);
