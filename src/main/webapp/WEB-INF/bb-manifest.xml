@@ -10,7 +10,7 @@
     <description value="bblogbackb2" />
     <default-locale value="en_US" />
 
-    <version value="1.8.4" />
+    <version value="1.9.1" />
     <requires>
       <bbversion value="3000.1.0" />
     </requires>
@@ -73,6 +73,40 @@
       <schema-dir dir-name="bblogback" />
     </schema-dirs>
 
+    <application-defs>
+	    <application  handle="bb-logbackb2"
+  	      type="shared"  name="Bb Logback B2"
+  	      small-icon="" large-icon="">
+	    <description lang="en_US">
+ 		  Bb Logback B2
+  		</description>
+       <links>
+          <link>
+	        <type value="system_tool"/>
+	        <name value="system_tool link"/>
+		<url value="https://www.microsoft.com"/>
+	        <description value="B2 System Tool Link"/>
+          </link>
+
+          <link>
+	        <type value="tool"/>
+	        <name value="tool link"/>
+		<url value="https://www.microsoft.com"/>
+	        <description value="B2 Tool Link"/>
+          </link>
+
+            <link>
+	        <type value="user_tool"/>
+	        <name value="user_tool link"/>
+		<url value="https://www.microsoft.com"/>
+	        <description value="B2 User Tool Link"/>
+	</link>
+
+       </links>
+
+      </application>
+
+    </application-defs>
     <permissions>
       <permission type="persist" name="*" actions="create,modify,delete,persist" />
       <permission type="attribute" name="user.*" actions="get,set" />

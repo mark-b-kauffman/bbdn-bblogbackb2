@@ -29,6 +29,7 @@ package com.blackboard.bblogbackb2;
  */
 
 import blackboard.platform.plugin.PlugInUtil;
+import blackboard.util.GeneralUtil;
 
  import ch.qos.logback.classic.LoggerContext;
  import ch.qos.logback.core.util.StatusPrinter;
@@ -36,6 +37,7 @@ import blackboard.platform.plugin.PlugInUtil;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Map;
 
 import java.security.Security;
 
@@ -71,7 +73,7 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 		String uriStem = PlugInUtil.getUriStem("bbdn", "bblogbackb2");
 
-		model.addAttribute("serverTime", formattedDate );
+    model.addAttribute("serverTime", formattedDate );
 		model.addAttribute("uriStem", uriStem);
 
 		return "home";
@@ -80,7 +82,6 @@ public class HomeController {
 	@RequestMapping(value = "/learnhello", method = RequestMethod.GET)
 	public String learnhello(Locale locale, Model model) {
 		logger.info("Welcome to /learnhello! The client locale is {}.", locale);
-
 		// print internal Logback state
 		LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
 		StatusPrinter.print(lc);
@@ -90,6 +91,9 @@ public class HomeController {
 
 		String formattedDate = dateFormat.format(date);
 
+    String instance_guid = GeneralUtil.getSystemInstallationId();
+
+    model.addAttribute("INSTANCE_GUID", instance_guid);
 		model.addAttribute("serverTime", formattedDate );
 
 		return "learnhello";
@@ -113,4 +117,5 @@ public class HomeController {
 
 		return "logbacklog";
 	}
+
 }
