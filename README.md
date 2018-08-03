@@ -24,6 +24,7 @@ To deploy the B2 to your Learn server, run:
 ./gradlew -Dserver=host:port deployB2
 
 Example: ./gradlew -Dserver=localhost:9876 deployB2
+
 MODIFY THE SCHEMA NAME (BBLEARN below) TO MATCH THAT OF THE SYSTEM YOU DEPLOY TO.
 Home URL Example: `https://<hostname>/webapps/bbdn-bblogbackb2-BBLEARN/`
 Learn Page URL Example: `https://<hostname>/webapps/bbdn-bblogbackb2-BBLEARN/learnhello`
