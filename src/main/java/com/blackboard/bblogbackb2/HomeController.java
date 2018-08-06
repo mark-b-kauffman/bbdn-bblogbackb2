@@ -97,6 +97,10 @@ public class HomeController {
 
 		String formattedDate = dateFormat.format(date);
 
+    String uriStem = PlugInUtil.getUriStem("bbdn", "bblogbackb2");
+
+		model.addAttribute("uriStem", uriStem);
+
     // WARNING: GeneralUtil is an unpublished Class.
     // Blackboard in no way recommends or supports it's use for any purpose.
     // Use at your own risk. It may change at any time.

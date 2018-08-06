@@ -45,6 +45,7 @@
 <P>  The time on the server is ${serverTime}. </P>
 
 <P>  INSTANCE_GUID is ${INSTANCE_GUID}. </P>
+<P> The uriStem is ${uriStem}. </P>
 
 </body>
 </html>
