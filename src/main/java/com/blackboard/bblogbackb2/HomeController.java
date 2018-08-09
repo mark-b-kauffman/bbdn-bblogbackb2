@@ -28,7 +28,12 @@ package com.blackboard.bblogbackb2;
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+import blackboard.data.course.Course;
+import blackboard.persist.course.*;
+import blackboard.persist.*;
+
 import blackboard.platform.plugin.PlugInUtil;
+
 // WARNING: GeneralUtil is an unpublished Class.
 // Blackboard in no way recommends or supports it's use for any purpose.
 // Use at your own risk. It may change at any time.
@@ -133,5 +138,51 @@ public class HomeController {
 
 		return "logbacklog";
 	}
+
+  @RequestMapping(value = "/coursetest", method = RequestMethod.GET)
+  public String coursetest(Locale locale, Model model) {
+    logger.info("Welcome to /coursetest! The client locale is {}.", locale);
+    // print internal Logback state
+    LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
+    StatusPrinter.print(lc);
+
+    Date date = new Date();
+    DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+
+    String formattedDate = dateFormat.format(date);
+
+    String uriStem = PlugInUtil.getUriStem("bbdn", "bblogbackb2");
+
+    model.addAttribute("uriStem", uriStem);
+
+    Course course;
+    CourseDbLoader crsLoader;
+    String batch_uid = "";
+    try
+    {
+      crsLoader = CourseDbLoader.Default.getInstance();
+      course = crsLoader.loadByCourseId("mbk-test");
+      batch_uid = course.getBatchUid();
+    }
+    catch ( Exception e )
+    {
+          batch_uid = "load-course-failed";
+          e.printStackTrace();
+    }
+
+    model.addAttribute("BATCH_UID", batch_uid);
+    // WARNING: GeneralUtil is an unpublished Class.
+    // Blackboard in no way recommends or supports it's use for any purpose.
+    // Use at your own risk. It may change at any time.
+    // You are responsible for monitorin the package it ships with and
+    // making changes to your code as necessary. Blackboard is under no
+    // obligation to inform you if or when the class changes.
+    String instance_guid = GeneralUtil.getSystemInstallationId();
+
+    model.addAttribute("INSTANCE_GUID", instance_guid);
+    model.addAttribute("serverTime", formattedDate );
+
+    return "coursetest";
+  }
 
 }
