@@ -158,19 +158,27 @@ public class HomeController {
     Course course;
     CourseDbLoader crsLoader;
     String batch_uid = "";
+    String is_closed = "";
     try
     {
       crsLoader = CourseDbLoader.Default.getInstance();
       course = crsLoader.loadByCourseId("mbk-test");
       batch_uid = course.getBatchUid();
+        if (course.isClosed())
+          is_closed = "course.isClosed is TRUE";
+        else
+          is_closed = "course.isClosed is FALSE";
     }
     catch ( Exception e )
     {
           batch_uid = "load-course-failed";
+          is_closed = "We don't know the state of course.isClosed().";
           e.printStackTrace();
     }
 
     model.addAttribute("BATCH_UID", batch_uid);
+    model.addAttribute("IS_CLOSED", is_closed);
+
     // WARNING: GeneralUtil is an unpublished Class.
     // Blackboard in no way recommends or supports it's use for any purpose.
     // Use at your own risk. It may change at any time.

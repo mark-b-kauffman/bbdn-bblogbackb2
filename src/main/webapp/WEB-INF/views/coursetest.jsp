@@ -48,6 +48,7 @@
 <P>  INSTANCE_GUID is ${INSTANCE_GUID}. </P>
 <P> The uriStem is ${uriStem}. </P>
 <P> The BATCH_UID of mbk-test course is ${BATCH_UID}. </P>
+<P> Course IS_CLOSED is ${IS_CLOSED}. </P>
 
 </body>
 </html>
