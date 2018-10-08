@@ -10,7 +10,7 @@
     <description value="bblogbackb2" />
     <default-locale value="en_US" />
 
-    <version value="2.0.4" />
+    <version value="2.1.12" />
     <requires>
       <bbversion value="3000.1.0" />
     </requires>
@@ -82,17 +82,23 @@
   		</description>
        <links>
           <link>
-	        <type value="system_tool"/>
-	        <name value="system_tool link"/>
-		<url value="https://www.microsoft.com"/>
-	        <description value="B2 System Tool Link"/>
+	          <type value="system_tool"/>
+	           <name value="system_tool link"/>
+		       <url value="https://www.microsoft.com"/>
+	         <description value="B2 System Tool Link"/>
+          </link>
+          <link>
+              <type value="tool" />
+              <name value="Logback Content JSP" />
+              <url value="linkjsp/Content.jsp" />
+              <description value="Logback Content JSP" />
           </link>
 
           <link>
-	        <type value="tool"/>
-	        <name value="tool link"/>
+	        <type value="logback tool"/>
+	        <name value="logback tool link"/>
 		<url value="https://www.microsoft.com"/>
-	        <description value="B2 Tool Link"/>
+	        <description value="Logback B2 Tool Link"/>
           </link>
 
             <link>

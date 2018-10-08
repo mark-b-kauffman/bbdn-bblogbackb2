@@ -33,6 +33,11 @@
     </servlet>
 
     <servlet>
+        <servlet-name>org.apache.jsp.WEB_002dINF.views.coursetest_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.WEB_002dINF.views.coursetest_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
         <servlet-name>org.apache.jsp.WEB_002dINF.views.learnhello_jsp</servlet-name>
         <servlet-class>org.apache.jsp.WEB_002dINF.views.learnhello_jsp</servlet-class>
     </servlet>
@@ -72,9 +77,19 @@
         <servlet-class>org.apache.jsp.linkjsp.itemdata_jsp</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>org.apache.jsp.linkjsp.Content_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.linkjsp.Content_jsp</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>org.apache.jsp.WEB_002dINF.views.logbacklog_jsp</servlet-name>
         <url-pattern>/WEB-INF/views/logbacklog.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.WEB_002dINF.views.coursetest_jsp</servlet-name>
+        <url-pattern>/WEB-INF/views/coursetest.jsp</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
@@ -115,6 +130,11 @@
     <servlet-mapping>
         <servlet-name>org.apache.jsp.linkjsp.itemdata_jsp</servlet-name>
         <url-pattern>/linkjsp/itemdata.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.linkjsp.Content_jsp</servlet-name>
+        <url-pattern>/linkjsp/Content.jsp</url-pattern>
     </servlet-mapping>
 
 <!-- JSPC servlet mappings end -->
