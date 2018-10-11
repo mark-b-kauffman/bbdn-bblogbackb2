@@ -28,9 +28,11 @@ package com.blackboard.bblogbackb2;
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+import java.util.Properties;
 import blackboard.data.course.Course;
 import blackboard.persist.course.*;
 import blackboard.persist.*;
+import blackboard.platform.config.*;
 
 import blackboard.platform.plugin.PlugInUtil;
 
@@ -193,4 +195,38 @@ public class HomeController {
     return "coursetest";
   }
 
-}
+  @RequestMapping(value = "/bbproperties", method = RequestMethod.GET)
+  public String b2properties(Locale locale, Model model) {
+    logger.info("Welcome to /bbproperties! The client locale is {}.", locale);
+    // print internal Logback state
+    LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
+    StatusPrinter.print(lc);
+
+    Date date = new Date();
+    DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+
+    String formattedDate = dateFormat.format(date);
+
+    String uriStem = PlugInUtil.getUriStem("bbdn", "bblogbackb2");
+
+    model.addAttribute("uriStem", uriStem);
+
+    Properties properties = blackboard.platform.config.ConfigurationServiceFactory.getInstance().getBbProperties();
+
+    model.addAttribute("properties", properties);
+
+    // WARNING: GeneralUtil is an unpublished Class.
+    // Blackboard in no way recommends or supports it's use for any purpose.
+    // Use at your own risk. It may change at any time.
+    // You are responsible for monitorin the package it ships with and
+    // making changes to your code as necessary. Blackboard is under no
+    // obligation to inform you if or when the class changes.
+    String instance_guid = GeneralUtil.getSystemInstallationId();
+
+    model.addAttribute("INSTANCE_GUID", instance_guid);
+    model.addAttribute("serverTime", formattedDate );
+
+    return "bbproperties";
+  } // END
+
+} // END public class HomeController {
