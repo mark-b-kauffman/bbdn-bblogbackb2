@@ -47,6 +47,9 @@
 <P>  INSTANCE_GUID is ${INSTANCE_GUID}. </P>
 <P> The uriStem is ${uriStem}. </P>
 
+<P>  Your blackboard.data.user.User.getUserName() is: ${userName}
+<P>  Your blackboard.data.user.User.getBatchUid() is: ${batchUid}
+
 </body>
 </html>
 

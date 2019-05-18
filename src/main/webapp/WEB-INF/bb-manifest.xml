@@ -10,7 +10,7 @@
     <description value="bblogbackb2" />
     <default-locale value="en_US" />
 
-    <version value="3.0.3" />
+    <version value="2019.05.17" />
     <requires>
       <bbversion value="3000.1.0" />
     </requires>

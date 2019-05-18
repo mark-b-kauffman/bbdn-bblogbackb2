@@ -31,8 +31,13 @@ package com.blackboard.bblogbackb2;
 import java.util.Properties;
 import blackboard.data.course.Course;
 import blackboard.persist.course.*;
+import blackboard.data.user.User;
 import blackboard.persist.*;
+import blackboard.persist.Id;
 import blackboard.platform.config.*;
+import blackboard.platform.context.Context;
+import blackboard.platform.context.ContextManagerFactory;
+
 
 import blackboard.platform.plugin.PlugInUtil;
 
@@ -103,6 +108,15 @@ public class HomeController {
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 
 		String formattedDate = dateFormat.format(date);
+    Context ctx = ContextManagerFactory.getInstance().getContext();
+
+    Id userId = ctx.getUserId();
+    // User is an object.  The User has a userName which Chico calls the portal ID.
+    User user = ctx.getUser();
+    String userBatchUid = user.getBatchUid();
+    String userName = user.getUserName();
+    model.addAttribute("batchUid",userBatchUid);
+    model.addAttribute("userName",userName);
 
     String uriStem = PlugInUtil.getUriStem("bbdn", "bblogbackb2");
 

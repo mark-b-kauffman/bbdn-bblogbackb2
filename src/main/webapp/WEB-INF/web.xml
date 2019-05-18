@@ -43,6 +43,11 @@
     </servlet>
 
     <servlet>
+        <servlet-name>org.apache.jsp.WEB_002dINF.views.bbproperties_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.WEB_002dINF.views.bbproperties_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
         <servlet-name>org.apache.jsp.WEB_002dINF.views.home_jsp</servlet-name>
         <servlet-class>org.apache.jsp.WEB_002dINF.views.home_jsp</servlet-class>
     </servlet>
@@ -95,6 +100,11 @@
     <servlet-mapping>
         <servlet-name>org.apache.jsp.WEB_002dINF.views.learnhello_jsp</servlet-name>
         <url-pattern>/WEB-INF/views/learnhello.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.WEB_002dINF.views.bbproperties_jsp</servlet-name>
+        <url-pattern>/WEB-INF/views/bbproperties.jsp</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
