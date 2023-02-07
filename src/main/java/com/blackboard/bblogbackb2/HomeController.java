@@ -57,7 +57,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
 
-import java.security.Security;
+// import java.security.Security;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -83,7 +83,7 @@ public class HomeController {
 		logger.error("There was NOT an error. This is a test message.");
 		System.out.println("springmvcb2 - Is this visible in Kibana? I didn't intentionally log it in the correct format.");
 
-		Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
+//		Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
 
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);

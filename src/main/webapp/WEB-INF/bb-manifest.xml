@@ -10,9 +10,9 @@
     <description value="bblogbackb2" />
     <default-locale value="en_US" />
 
-    <version value="2019.05.17" />
+    <version value="2022.02.061" />
     <requires>
-      <bbversion value="3000.1.0" />
+      <bbversion value="3900.13.0" />
     </requires>
 
     <vendor>
