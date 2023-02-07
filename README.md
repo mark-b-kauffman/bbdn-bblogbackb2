@@ -12,8 +12,8 @@ https://github.com/AllTheDucks/b2-logging-utils
 Credit to Scott Hurrey for all the assistance getting this project to pre-compile JSP pages and insert them in the .war file.
 
 ### Clone to local repo
-####bitbucket:
-git clone https://markkauffman2000@bitbucket.org/markkauffman2000/bbdn-bblogback.git bbdn-bblogbackb2
+
+git clone https://github.com/mark-b-kauffman/bbdn-bbloggerb2.git bbdn-bblogbackb2
 
 ### Building
 To build the project, just run:
